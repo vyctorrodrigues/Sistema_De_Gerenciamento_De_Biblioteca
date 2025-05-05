@@ -1,0 +1,65 @@
+package sistemadegerenciamentodebiblioteca;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Biblioteca {
+    
+    
+    private Map<String, Livro> livrosDisponiveis = new HashMap<>();
+    private Map<String, Usuario> usuarios = new HashMap<>();
+    
+    public void adicionarUsuario(Usuario usuario){
+        if(!usuarios.containsKey(usuario.getId())){
+            usuarios.put(usuario.getId(), usuario);
+            System.out.println("Usuario adicionado com sucesso!");
+        }else {
+            System.out.println("Usuario Cadastrado!");
+        }
+    }
+    
+    public void buscarUsuarioPorId(String id){
+        
+    }
+    public void adicionarLivro(Livro livro){
+        if(!livrosDisponiveis.containsKey(livro.getTitulo())){
+            livrosDisponiveis.put(livro.getTitulo(), livro);
+            System.out.println("Livro adicionado com sucesso");
+        }else {
+            System.out.println("O livro ja esta na biblioteca.");
+        }
+    }
+    
+    public boolean verificarDisponibilidade(Livro livro){
+        return livrosDisponiveis.containsKey(livro.getTitulo()) && livro.getDisponivel();
+    }
+    
+    public void aluguelDeLivro(Livro livro){
+        if(verificarDisponibilidade(livro)){
+            livro.setDisponivel(false);
+            System.out.println("Você alugou o livro " + livro.getTitulo());
+        }else {
+            System.out.println("Livro nao esta disponivel");
+        }
+    }
+    
+    public void devolverLivro(Livro livro){
+        if(!livro.getDisponivel()){
+            livro.setDisponivel(true);
+            System.out.println("Livro devolvido com sucesso: " + livro.getTitulo());
+        }else {
+            System.out.println("Este livro nao foi alugado");
+        }
+    }
+    
+    public Livro buscarLivroPorTitulo(String titulo) {
+        return livrosDisponiveis.get(titulo);
+    }
+
+    
+    public void listarLivros(){
+        for(Livro livro : livrosDisponiveis.values()){
+            System.out.println(livro.getTitulo() + " - " + (livro.getDisponivel()? "Disponivel": "Indisponivel"));
+        }
+    }
+}
