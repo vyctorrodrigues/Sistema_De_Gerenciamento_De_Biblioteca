@@ -18,8 +18,14 @@ public class Biblioteca {
         }
     }
     
-    public void buscarUsuarioPorId(String id){
+    public void buscarUsuarioPornome(String nome){
+        Usuario usuarioEncontrado = usuarios.get(nome);
         
+        if(usuarioEncontrado == null){
+            System.out.println("Usuário com ID " + nome + "não encontrado!");
+        } else {
+            System.out.println("Usuario encontrado " + usuarioEncontrado.getNome());
+        }
     }
     public void adicionarLivro(Livro livro){
         if(!livrosDisponiveis.containsKey(livro.getTitulo())){
@@ -60,6 +66,12 @@ public class Biblioteca {
     public void listarLivros(){
         for(Livro livro : livrosDisponiveis.values()){
             System.out.println(livro.getTitulo() + " - " + (livro.getDisponivel()? "Disponivel": "Indisponivel"));
+        }
+    }
+    
+    public void listarUsuarios(){
+        for(Usuario usuario : usuarios.values()){
+            System.out.println(usuario.getNome());
         }
     }
 }

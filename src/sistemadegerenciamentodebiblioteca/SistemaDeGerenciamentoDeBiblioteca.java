@@ -15,6 +15,8 @@ public class SistemaDeGerenciamentoDeBiblioteca {
             System.out.println("3. Alugar livro");
             System.out.println("4. Devolver livro");
             System.out.println("5. Cadastrar");
+            System.out.println("6. Listar Usuarios");
+            System.out.println("7. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -61,6 +63,9 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                     biblioteca.adicionarUsuario(novoUsuario);
                 }
                 case 6 -> {
+                    biblioteca.listarUsuarios();
+                }
+                case 7 -> {
                     System.out.println("Saindo...");
                     break OUTER;
                 }

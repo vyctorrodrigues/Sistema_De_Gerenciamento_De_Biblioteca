@@ -28,7 +28,17 @@ public class Usuario {
             livrosAlugados.add(livro);
         }
         
-        
+    }
+    
+    public void listarLivrosAlugados(){
+        if(livrosAlugados.isEmpty()){
+            System.out.println(this.getNome() + "O usuario não tem livros alugados!");
+        }else{
+            System.out.println(this.getNome()+ "tem seguintes livros alugados: ");
+            for(Livro livro : livrosAlugados){
+                System.out.println(" - "+ livro.getTitulo());
+            }
+        }
     }
     public String getId() {
         return id;
