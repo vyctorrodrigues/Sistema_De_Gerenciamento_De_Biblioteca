@@ -1,4 +1,7 @@
 package sistemadegerenciamentodebiblioteca;
+import livro.Livro;
+import biblioteca.Biblioteca;
+import usuario.Usuario;
 import java.util.Scanner;
 public class SistemaDeGerenciamentoDeBiblioteca {                                        
 
