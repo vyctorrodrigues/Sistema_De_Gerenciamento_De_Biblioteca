@@ -30,10 +30,15 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                     String titulo = scanner.nextLine();
                     System.out.print("Digite o autor do livro: ");
                     String autor = scanner.nextLine();
-                    Livro livro = new Livro(titulo, autor, true);
+                    System.out.print("Digite o genero do livro: ");
+                    String genero = scanner.nextLine();
+                    Livro livro = new Livro(titulo, autor, genero, true);
                     biblioteca.adicionarLivro(livro);
                 }
-                case 2 -> biblioteca.listarLivros();
+                case 2 -> {
+                    biblioteca.listarLivros();
+                    
+                }
                 case 3 -> {
                     System.out.print("Digite o título do livro para alugar: ");
                     String titulo = scanner.nextLine();

@@ -1,7 +1,9 @@
-package sistemadegerenciamentodebiblioteca;
+package biblioteca;
 
+import usuario.Usuario;
 import java.util.HashMap;
 import java.util.Map;
+import livro.Livro;
 
 public class Biblioteca {
     
@@ -64,8 +66,14 @@ public class Biblioteca {
 
     
     public void listarLivros(){
+        if(livrosDisponiveis.isEmpty()){
+            System.out.println("Nenhum livro cadastrado.");
+        }
         for(Livro livro : livrosDisponiveis.values()){
-            System.out.println(livro.getTitulo() + " - " + (livro.getDisponivel()? "Disponivel": "Indisponivel"));
+            System.out.println("Título: " + livro.getTitulo());
+            System.out.println("Autor: " + livro.getAutor());
+            System.out.println("Gêneros: " + String.join(", ", livro.getGenero()));
+            System.out.println("-------------------------");
         }
     }
     

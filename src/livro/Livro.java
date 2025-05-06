@@ -1,15 +1,20 @@
-package sistemadegerenciamentodebiblioteca;
+package livro;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Livro {
     private String titulo;
     private String autor;
+    private String genero;
     private String isbn;
     private boolean disponivel;
-
-    public Livro(String titulo, String autor, boolean disponivel) {
+    
+    public Livro(String titulo, String autor, String genero, boolean disponivel) {
         this.disponivel = disponivel;
         this.titulo = titulo;
         this.autor = autor;
+        this.genero = genero;
     }
     
     public void alugado(){
@@ -29,6 +34,15 @@ public class Livro {
             System.out.println("Esse Esta disponivel!");
         }
     }
+    
+    public String getGenero() {
+        return genero;
+    }
+    
+    public void setGenero(String genero){
+        this.genero = genero;
+    }
+    
     public String getTitulo() {
         return titulo;
     }

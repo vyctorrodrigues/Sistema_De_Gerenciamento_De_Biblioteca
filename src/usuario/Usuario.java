@@ -1,7 +1,9 @@
-package sistemadegerenciamentodebiblioteca;
+package usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+import biblioteca.Biblioteca;
+import livro.Livro;
 
 public class Usuario {
     private String id;
