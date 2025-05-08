@@ -1,13 +1,10 @@
 package livro;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Livro {
     private String titulo;
     private String autor;
     private String genero;
-    private String isbn;
     private boolean disponivel;
     
     public Livro(String titulo, String autor, String genero, boolean disponivel) {
@@ -59,14 +56,6 @@ public class Livro {
         this.autor = autor;
     }
 
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
     public boolean getDisponivel() {
         return disponivel;
     }
@@ -76,7 +65,7 @@ public class Livro {
     }
 
     public String exibirInfo() {
-        return "Livro {" + "titulo = " + titulo + ", autor=" + autor + ", isbn=" + isbn + ", disponivel=" + disponivel + '}';
+        return "Livro {" + "titulo = " + titulo + ", autor=" + autor + ", isbn=" + ", disponivel=" + disponivel + '}';
     }
     
     

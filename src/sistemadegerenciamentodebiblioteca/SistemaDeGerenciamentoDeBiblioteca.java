@@ -34,6 +34,7 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                     String genero = scanner.nextLine();
                     Livro livro = new Livro(titulo, autor, genero, true);
                     biblioteca.adicionarLivro(livro);
+                    
                 }
                 case 2 -> {
                     biblioteca.listarLivros();
