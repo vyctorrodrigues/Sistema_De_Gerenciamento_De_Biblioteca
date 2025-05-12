@@ -38,6 +38,15 @@ public class Biblioteca {
         }
     }
     
+    public void removerLivro(Livro livro){
+        if(livrosDisponiveis.containsKey(livro.getTitulo())){
+            livrosDisponiveis.remove(livro.getTitulo());
+            System.out.println("Livro removido com sucesso!");
+        }else {
+            System.out.println("Esse tituto não existe para ser removido!");
+        }
+    }
+    
     public boolean verificarDisponibilidade(Livro livro){
         return livrosDisponiveis.containsKey(livro.getTitulo()) && livro.getDisponivel();
     }

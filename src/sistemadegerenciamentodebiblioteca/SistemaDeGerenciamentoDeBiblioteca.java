@@ -19,7 +19,8 @@ public class SistemaDeGerenciamentoDeBiblioteca {
             System.out.println("4. Devolver livro");
             System.out.println("5. Cadastrar");
             System.out.println("6. Listar Usuarios");
-            System.out.println("7. Sair");
+            System.out.println("7. Excluir livro");
+            System.out.println("8. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -32,7 +33,7 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                     String autor = scanner.nextLine();
                     System.out.print("Digite o genero do livro: ");
                     String genero = scanner.nextLine();
-                    Livro livro = new Livro(titulo, autor, genero, true);
+                    Livro livro = new Livro();
                     biblioteca.adicionarLivro(livro);
                     
                 }
@@ -74,7 +75,16 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                 case 6 -> {
                     biblioteca.listarUsuarios();
                 }
+                
                 case 7 -> {
+                    System.out.println("Digite o nome do livro");
+                    String titulo = scanner.nextLine();
+                    System.out.println("Digite o nome do autor");
+                    String autor = scanner.nextLine();
+                    Livro livro = new Livro();
+                    biblioteca.removerLivro(livro);
+                }
+                case 8 -> {
                     System.out.println("Saindo...");
                     break OUTER;
                 }
