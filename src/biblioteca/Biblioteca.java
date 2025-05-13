@@ -16,10 +16,18 @@ public class Biblioteca {
             usuarios.put(usuario.getId(), usuario);
             System.out.println("Usuario adicionado com sucesso!");
         }else {
-            System.out.println("Usuario Cadastrado!");
+            System.out.println("Usuario ja Cadastrado!");
         }
     }
     
+    public void removerUsuario(Usuario usuario){
+        if(usuarios.containsKey(usuario.getId())){
+            usuarios.remove(usuario.getId());
+            System.out.println("Usuario Excluido!");
+        }else {
+            System.out.println("Usuario não existe!");
+        }
+    }
     public void buscarUsuarioPornome(String nome){
         Usuario usuarioEncontrado = usuarios.get(nome);
         

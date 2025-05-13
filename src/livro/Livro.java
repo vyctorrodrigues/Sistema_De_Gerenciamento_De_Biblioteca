@@ -8,10 +8,7 @@ public class Livro {
     private boolean disponivel;
     
     public Livro() {
-        this.disponivel = disponivel;
-        this.titulo = titulo;
-        this.autor = autor;
-        this.genero = genero;
+        
     }
     
     public void alugado(){

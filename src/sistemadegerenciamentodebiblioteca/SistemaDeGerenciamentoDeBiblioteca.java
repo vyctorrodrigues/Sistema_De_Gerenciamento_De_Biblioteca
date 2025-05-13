@@ -20,7 +20,8 @@ public class SistemaDeGerenciamentoDeBiblioteca {
             System.out.println("5. Cadastrar");
             System.out.println("6. Listar Usuarios");
             System.out.println("7. Excluir livro");
-            System.out.println("8. Sair");
+            System.out.println("8. Excluir Usuario");
+            System.out.println("9. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
@@ -84,7 +85,17 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                     Livro livro = new Livro();
                     biblioteca.removerLivro(livro);
                 }
+                
                 case 8 -> {
+                    System.out.println("Digite seu Usuario: ");
+                    String nome = scanner.nextLine();
+                    System.out.println("Digite seu email: ");
+                    String email= scanner.nextLine();
+                    String id = scanner.nextLine();
+                    Usuario novoUsuario = new Usuario(id,nome,email);
+                    biblioteca.removerUsuario(novoUsuario);
+                }
+                case 9 -> {
                     System.out.println("Saindo...");
                     break OUTER;
                 }
