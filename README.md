@@ -6,6 +6,7 @@ Este projeto é um sistema simples de gerenciamento de biblioteca, desenvolvido 
 
 - Linguagem: **Java**
 - Paradigma: **POO (Encapsulamento, Abstração, Reuso e Responsabilidade)**
+- **CRUD**
 - Pacotes organizados por domínio: `biblioteca`, `livro` e `usuario`
 - Estrutura de dados: `HashMap`, `ArrayList`
 
