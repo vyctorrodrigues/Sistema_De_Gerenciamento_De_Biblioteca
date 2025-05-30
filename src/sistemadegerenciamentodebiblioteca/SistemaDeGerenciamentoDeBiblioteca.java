@@ -17,7 +17,7 @@ public class SistemaDeGerenciamentoDeBiblioteca {
             System.out.println("2. Listar livros");
             System.out.println("3. Alugar livro");
             System.out.println("4. Devolver livro");
-            System.out.println("5. Cadastrar");
+            System.out.println("5. Cadastrar-se");
             System.out.println("6. Listar Usuarios");
             System.out.println("7. Excluir livro");
             System.out.println("8. Excluir Usuario");
