@@ -28,15 +28,30 @@ public class Biblioteca {
             System.out.println("Usuario não existe!");
         }
     }
+
+    public void removerUsuarioPorId(String id){
+        if (usuarios.containsKey(id)) {
+            usuarios.remove(id);
+            System.out.println("Usuário removido com sucesso!");
+        }else {
+            System.out.println("Usuário com ID " + id + " não encontrado.");
+        }
+    }
+    
     public void buscarUsuarioPornome(String nome){
         Usuario usuarioEncontrado = usuarios.get(nome);
         
         if(usuarioEncontrado == null){
-            System.out.println("Usuário com ID " + nome + "não encontrado!");
+            System.out.println("Usuário com" + nome + "não encontrado!");
         } else {
             System.out.println("Usuario encontrado " + usuarioEncontrado.getNome());
         }
     }
+    
+    public Usuario buscarUsuarioPorId(String id){
+        return usuarios.get(id);
+    }
+
     public void adicionarLivro(Livro livro){
         if(!livrosDisponiveis.containsKey(livro.getTitulo())){
             livrosDisponiveis.put(livro.getTitulo(), livro);
@@ -46,9 +61,9 @@ public class Biblioteca {
         }
     }
     
-    public void removerLivro(Livro livro){
-        if(livrosDisponiveis.containsKey(livro.getTitulo())){
-            livrosDisponiveis.remove(livro.getTitulo());
+    public void removerLivro(String titulo){
+        if(livrosDisponiveis.containsKey(titulo)){
+            livrosDisponiveis.remove(titulo);
             System.out.println("Livro removido com sucesso!");
         }else {
             System.out.println("Esse tituto não existe para ser removido!");
@@ -95,6 +110,9 @@ public class Biblioteca {
     }
     
     public void listarUsuarios(){
+        if (usuarios.isEmpty()) {
+            System.out.println("Usuario Não encontrado");
+        }
         for(Usuario usuario : usuarios.values()){
             System.out.println(usuario.getNome());
         }

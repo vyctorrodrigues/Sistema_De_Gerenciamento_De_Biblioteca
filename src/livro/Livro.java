@@ -7,10 +7,14 @@ public class Livro {
     private String genero;
     private boolean disponivel;
     
-    public Livro() {
-        
-    }
     
+    
+    public Livro(String titulo, String autor, String genero) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.genero = genero;
+    }
+
     public void alugado(){
         if(this.getDisponivel()){
             this.setDisponivel(false);

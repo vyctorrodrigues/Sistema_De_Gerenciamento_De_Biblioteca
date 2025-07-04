@@ -19,22 +19,25 @@ public class SistemaDeGerenciamentoDeBiblioteca {
             System.out.println("4. Devolver livro");
             System.out.println("5. Cadastrar-se");
             System.out.println("6. Listar Usuarios");
-            System.out.println("7. Excluir livro");
-            System.out.println("8. Excluir Usuario");
-            System.out.println("9. Sair");
+            System.out.println("7. Listar Usuario por ID");
+            System.out.println("8. Excluir livro");
+            System.out.println("9. Excluir Usuario por nome");
+            System.out.println("10. Excluir Usuário por ID");
+            System.out.println("11. Sair");
             System.out.print("Escolha uma opção: ");
             int opcao = scanner.nextInt();
             scanner.nextLine();
             //Switch interno
             switch (opcao) {
                 case 1 -> {
+                    
                     System.out.print("Digite o título do livro: ");
                     String titulo = scanner.nextLine();
                     System.out.print("Digite o autor do livro: ");
                     String autor = scanner.nextLine();
                     System.out.print("Digite o genero do livro: ");
                     String genero = scanner.nextLine();
-                    Livro livro = new Livro();
+                    Livro livro = new Livro(titulo, autor, genero);
                     biblioteca.adicionarLivro(livro);
                     
                 }
@@ -64,38 +67,52 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                 }
                 case 5 -> {
                     
-                    System.out.println("Digite seu Usuario: ");
+                    System.out.println("Digite o nome Usuario: ");
                     String nome = scanner.nextLine();
-                    System.out.println("Digite seu email: ");
+                    System.out.println("Digite o email: ");
                     String email= scanner.nextLine();
-                    System.out.println("Digite seu ID: ");
-                    String id = scanner.nextLine();
-                    Usuario novoUsuario = new Usuario(id, nome, email);
+                    Usuario novoUsuario = new Usuario(nome, email);
                     biblioteca.adicionarUsuario(novoUsuario);
+                    System.out.println("Usuário criado com ID: " + novoUsuario.getId());
+                    
                 }
                 case 6 -> {
                     biblioteca.listarUsuarios();
                 }
                 
                 case 7 -> {
-                    System.out.println("Digite o nome do livro");
-                    String titulo = scanner.nextLine();
-                    System.out.println("Digite o nome do autor");
-                    String autor = scanner.nextLine();
-                    Livro livro = new Livro();
-                    biblioteca.removerLivro(livro);
+                    System.out.println("Digite o ID do Usuário");
+                    String id = scanner.nextLine();
+                    Usuario usuario = biblioteca.buscarUsuarioPorId(id);
+                    if (usuario != null) {
+                        System.out.println("Usuário encontrado: " + usuario.getNome() + ", Email: " + usuario.getEmail());
+                    }else {
+                        System.out.println("Usuário não encontrado");
+                    }
                 }
                 
                 case 8 -> {
-                    System.out.println("Digite seu Usuario: ");
+                   System.out.println("Digite o livro que quer remover: ");
+                   String titulo =scanner.nextLine();
+                   biblioteca.removerLivro(titulo);
+                }
+                
+                case 9 -> {
+                    System.out.println("Digite o Usuário que deseja excluir: ");
                     String nome = scanner.nextLine();
-                    System.out.println("Digite seu email: ");
-                    String email= scanner.nextLine();
-                    String id = scanner.nextLine();
-                    Usuario novoUsuario = new Usuario(id,nome,email);
+                    System.out.println("Digite o email para remover: ");
+                    String email = scanner.nextLine();
+                    Usuario novoUsuario = new Usuario(nome,email);
                     biblioteca.removerUsuario(novoUsuario);
                 }
-                case 9 -> {
+
+                case 10 -> {
+                    System.out.println("Digite o ID do usuário para excluir: ");
+                    String id = scanner.nextLine();
+                    biblioteca.removerUsuarioPorId(id);
+                }
+
+                case 11 -> {
                     System.out.println("Saindo...");
                     break OUTER;
                 }

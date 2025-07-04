@@ -2,6 +2,8 @@ package usuario;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 import biblioteca.Biblioteca;
 import livro.Livro;
 
@@ -9,11 +11,12 @@ public class Usuario {
     private String id;
     private String nome;
     private String email;
-    private Biblioteca cadastro;
     private List <Livro> livrosAlugados = new ArrayList<>();
 
-    public Usuario(String id, String nome, String email) {
-        this.id = id;
+    public Usuario(String nome, String email) {
+        this.id = UUID.randomUUID().toString(); 
+        this.nome = nome;
+        this.email = email;
         this.livrosAlugados = new ArrayList<>();
     }
     
