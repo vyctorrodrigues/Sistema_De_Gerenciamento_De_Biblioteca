@@ -3,13 +3,15 @@ package biblioteca;
 import usuario.Usuario;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
 import livro.Livro;
 
 public class Biblioteca {
     
     
     private Map<String, Livro> livrosDisponiveis = new HashMap<>();
-    private Map<String, Usuario> usuarios = new HashMap<>();
+    private Map<UUID, Usuario> usuarios = new HashMap<>();
     
     public void adicionarUsuario(Usuario usuario){
         if(!usuarios.containsKey(usuario.getId())){
@@ -29,7 +31,7 @@ public class Biblioteca {
         }
     }
 
-    public void removerUsuarioPorId(String id){
+    public void removerUsuarioPorId(UUID id){
         if (usuarios.containsKey(id)) {
             usuarios.remove(id);
             System.out.println("Usuário removido com sucesso!");
@@ -48,7 +50,7 @@ public class Biblioteca {
         }
     }
     
-    public Usuario buscarUsuarioPorId(String id){
+    public Usuario buscarUsuarioPorId(UUID id){
         return usuarios.get(id);
     }
 

@@ -8,13 +8,13 @@ import biblioteca.Biblioteca;
 import livro.Livro;
 
 public class Usuario {
-    private String id;
+    private UUID id;
     private String nome;
     private String email;
     private List <Livro> livrosAlugados = new ArrayList<>();
 
     public Usuario(String nome, String email) {
-        this.id = UUID.randomUUID().toString(); 
+        this.id = UUID.randomUUID(); 
         this.nome = nome;
         this.email = email;
         this.livrosAlugados = new ArrayList<>();
@@ -43,11 +43,11 @@ public class Usuario {
             }
         }
     }
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

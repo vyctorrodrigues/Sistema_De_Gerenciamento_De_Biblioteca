@@ -2,6 +2,8 @@ package livro;
 
 
 public class Livro {
+    //Atributos
+    private int id;
     private String titulo;
     private String autor;
     private String genero;
@@ -56,6 +58,14 @@ public class Livro {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public boolean getDisponivel() {
