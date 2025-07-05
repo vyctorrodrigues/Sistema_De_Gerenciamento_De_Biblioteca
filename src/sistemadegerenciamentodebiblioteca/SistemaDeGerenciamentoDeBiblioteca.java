@@ -3,10 +3,11 @@ import livro.Livro;
 import biblioteca.Biblioteca;
 import usuario.Usuario;
 import java.util.Scanner;
+
 public class SistemaDeGerenciamentoDeBiblioteca {                                        
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+            Scanner scanner = new Scanner(System.in);
         Biblioteca biblioteca = new Biblioteca();
         
         //Switch externo
@@ -121,6 +122,9 @@ public class SistemaDeGerenciamentoDeBiblioteca {
         }
         
         scanner.close();
+
+       
     }
 }
+
 
