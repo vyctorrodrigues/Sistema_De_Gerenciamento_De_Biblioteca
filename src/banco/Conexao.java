@@ -10,6 +10,7 @@ public class Conexao {
     
 
     private static final String URL = "jdbc:postgresql://localhost:5432/biblioteca";
+
     private static final String USUARIO = "postgres";
     private static final String SENHA = "8431";
 
