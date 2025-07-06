@@ -1,10 +1,12 @@
 package usuario;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import biblioteca.Biblioteca;
+
 import livro.Livro;
 
 public class Usuario {
@@ -12,8 +14,10 @@ public class Usuario {
     private String nome;
     private String email;
     private List <Livro> livrosAlugados = new ArrayList<>();
+    private LocalDateTime dataCadastro;
 
     public Usuario(String nome, String email) {
+        this.dataCadastro = LocalDateTime.now();
         this.id = UUID.randomUUID(); 
         this.nome = nome;
         this.email = email;
@@ -21,12 +25,12 @@ public class Usuario {
     }
     
     public void devolverLivro(Livro livro, Biblioteca biblioteca){
-          biblioteca.devolverLivro(livro);
-          livrosAlugados.remove(livro);
+        biblioteca.devolverLivro(this.id, livro);
+        livrosAlugados.remove(livro);
        
     }
     public void alugarLivro(Livro livro, Biblioteca biblioteca){
-        biblioteca.aluguelDeLivro(livro);
+        biblioteca.aluguelDeLivro(this.id, livro);
         if(livro.getDisponivel()){
             livrosAlugados.add(livro);
         }
@@ -73,6 +77,14 @@ public class Usuario {
 
     public void setLivrosAlugados(List<Livro> livrosAlugados) {
         this.livrosAlugados = livrosAlugados;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
 
 }

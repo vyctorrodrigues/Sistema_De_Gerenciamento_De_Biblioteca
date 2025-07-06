@@ -1,14 +1,19 @@
 package biblioteca;
 
 import usuario.Usuario;
+
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import emprestimo.Emprestimo;
+import emprestimo.EmprestimoDAO;
 import livro.Livro;
 
 public class Biblioteca {
-    
+    private EmprestimoDAO emprestimoDao = new EmprestimoDAO();
     
     private Map<String, Livro> livrosDisponiveis = new HashMap<>();
     private Map<UUID, Usuario> usuarios = new HashMap<>();
@@ -40,15 +45,14 @@ public class Biblioteca {
         }
     }
     
-    public void buscarUsuarioPornome(String nome){
-        Usuario usuarioEncontrado = usuarios.get(nome);
-        
-        if(usuarioEncontrado == null){
-            System.out.println("Usuário com" + nome + "não encontrado!");
-        } else {
-            System.out.println("Usuario encontrado " + usuarioEncontrado.getNome());
+    public Usuario buscarUsuarioPornome(String nome){
+        for (Usuario usuario : usuarios.values()) {
+            if (usuario.getNome().equalsIgnoreCase(nome)) {
+                return usuario;
+            }
         }
-    }
+        return null; // não encontrou
+    }   
     
     public Usuario buscarUsuarioPorId(UUID id){
         return usuarios.get(id);
@@ -76,22 +80,60 @@ public class Biblioteca {
         return livrosDisponiveis.containsKey(livro.getTitulo()) && livro.getDisponivel();
     }
     
-    public void aluguelDeLivro(Livro livro){
-        if(verificarDisponibilidade(livro)){
-            livro.setDisponivel(false);
-            System.out.println("Você alugou o livro " + livro.getTitulo());
-        }else {
-            System.out.println("Livro nao esta disponivel");
+    public void aluguelDeLivro(UUID usuarioId, Livro livro){
+        Usuario usuario = usuarios.get(usuarioId);
+
+        if (usuario == null) {
+            System.out.println("Usuário não encontrado");
+            return;
         }
+
+        if (!verificarDisponibilidade(livro)) {
+            System.out.println("Livro não disponível.");
+            return;
+        }
+
+        //Atualiza status em memoria
+        livro.setDisponivel(false);
+        usuario.getLivrosAlugados().add(livro);
+
+        //Cria e salva o emprestimo dentro do banco
+
+        Emprestimo emprestimo = new Emprestimo(0, usuarioId, livro.getId(), LocalDateTime.now(), null);
+
+        emprestimoDao.salvarEmprestimo(emprestimo);
+        System.out.println("Livro alugado com sucesso: " + livro.getTitulo());
     }
     
-    public void devolverLivro(Livro livro){
-        if(!livro.getDisponivel()){
-            livro.setDisponivel(true);
-            System.out.println("Livro devolvido com sucesso: " + livro.getTitulo());
-        }else {
-            System.out.println("Este livro nao foi alugado");
+    public void devolverLivro(UUID usuarioId, Livro livro){
+        Usuario usuario = usuarios.get(usuarioId);
+
+        if (usuario ==  null) {
+            System.out.println("Usuário não encontrado");
+            return;
         }
+
+        if (livro.getDisponivel()) {
+            System.out.println("Este Livro já está disponível");
+            return;
+        }
+
+        //Atualiza em memoria
+        livro.setDisponivel(true);
+        usuario.getLivrosAlugados().remove(livro);
+
+        //Atualiza no banco: marcar devolução no empréstimo
+
+        List<Emprestimo> emprestimos = emprestimoDao.buscarEmprestimoPorUsuario(usuarioId);
+
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.getLivroId() == livro.getId() && emprestimo.getDataDevolucao() == null) {
+                emprestimoDao.devolverLivro(emprestimo.getId()); //Método atualiza data_devolucao
+                break;
+            }
+        }
+
+        System.out.println("Livro devolvido com sucesso: " + livro.getTitulo());
     }
     
     public Livro buscarLivroPorTitulo(String titulo) {
@@ -102,7 +144,9 @@ public class Biblioteca {
     public void listarLivros(){
         if(livrosDisponiveis.isEmpty()){
             System.out.println("Nenhum livro cadastrado.");
+            return;
         }
+
         for(Livro livro : livrosDisponiveis.values()){
             System.out.println("Título: " + livro.getTitulo());
             System.out.println("Autor: " + livro.getAutor());
@@ -113,7 +157,8 @@ public class Biblioteca {
     
     public void listarUsuarios(){
         if (usuarios.isEmpty()) {
-            System.out.println("Usuario Não encontrado");
+            System.out.println("Nenhum usuário cadastrado");
+            return;
         }
         for(Usuario usuario : usuarios.values()){
             System.out.println(usuario.getNome());

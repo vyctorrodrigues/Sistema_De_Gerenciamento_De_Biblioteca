@@ -77,7 +77,7 @@ public class Livro {
     }
 
     public String exibirInfo() {
-        return "Livro {" + "titulo = " + titulo + ", autor=" + autor + ", isbn=" + ", disponivel=" + disponivel + '}';
+        return "Livro {" + "titulo = " + titulo + ", autor = " + autor + "" + ", disponivel=" + disponivel + '}';
     }
     
     

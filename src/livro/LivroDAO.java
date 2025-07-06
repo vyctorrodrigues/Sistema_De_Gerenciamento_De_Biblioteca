@@ -13,6 +13,12 @@ import banco.Conexao;
 public class LivroDAO {
 
     public void salvarLivro(Livro livro) {
+
+        if (buscarLivroPorTitulo(livro.getTitulo()) != null) {
+            System.out.println("Já existe um livro com esse título!");
+            return;
+        }
+        
         String sql = "INSERT INTO livros (titulo, autor, genero, disponivel) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conexao.conectar();

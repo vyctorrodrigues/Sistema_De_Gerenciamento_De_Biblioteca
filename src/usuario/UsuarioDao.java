@@ -1,28 +1,23 @@
 package usuario;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
-
+import java.sql.*;
+import java.util.*;
 import banco.Conexao;
 
 public class UsuarioDao {
     
     public void salvarUsuario(Usuario usuario){
         
-        String sql = "INSERT INTO usuarios (nome, email) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO usuarios (nome, email, data_cadastro) VALUES (?, ?, ?)";
 
         try (Connection conn = Conexao.conectar();
             PreparedStatement stmt = conn.prepareStatement(sql)){
             
-            stmt.setObject(1, usuario.getId());
-            stmt.setString(2, usuario.getNome());
-            stmt.setString(3, usuario.getEmail());
-
+            stmt.setString(1, usuario.getNome());
+            stmt.setString(2, usuario.getEmail());
+            stmt.setTimestamp(3, Timestamp.valueOf(usuario.getDataCadastro()));
+            
+           
             stmt.executeUpdate();
 
             System.out.println("Usuário salvo com sucesso!");

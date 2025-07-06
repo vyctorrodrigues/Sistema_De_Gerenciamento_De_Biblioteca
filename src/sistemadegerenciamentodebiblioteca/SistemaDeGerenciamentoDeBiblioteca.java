@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
+
 public class SistemaDeGerenciamentoDeBiblioteca {                                        
     
     public static String formatarNome(String nome){
@@ -81,7 +82,7 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                     System.out.print("Digite o autor do livro: ");
                     String autor = scanner.nextLine();
 
-                    System.out.print("Digite o genero do livro: ");
+                    System.out.print("Digite o gênero do livro: ");
                     String genero = scanner.nextLine();
 
                     Livro livro = new Livro(titulo, autor, genero);
@@ -105,6 +106,28 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                 }
 
                 case 3 -> {
+                    
+                    List<Usuario> usuarios = usuarioDao.listarUsuarios();
+                    if (usuarios.isEmpty()) {
+                        System.out.println("Nenhum usuário cadastrado.");
+                        break;
+                    }
+                    System.out.println("Usuários cadastrados: ");
+                    
+                    for (Usuario usuario : usuarios) {
+                        System.out.println("ID: " + usuario.getId() + " - Nome: " + usuario.getNome());
+                    }
+
+                    System.out.print("Digite o ID do usuário que vai alugar o livro: ");
+                    String usuarioIdTexto = scanner.nextLine();
+
+                    UUID usuarioId;
+                    try {
+                        usuarioId = UUID.fromString(usuarioIdTexto);
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("ID inválido.");
+                        break;
+                    }
 
                     System.out.print("Digite o título do livro para alugar: ");
                     String titulo = scanner.nextLine();
@@ -118,7 +141,8 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                         separador();
                     } else {
                         System.out.println("Livro não disponivel ou não encontrado.");
-                    }                          
+                    }
+                    separador();
                 }
 
                 case 4 -> {
