@@ -51,6 +51,7 @@ public class LivroDAO {
                     rs.getString("autor"),
                     rs.getString("genero")
                 );
+                livro.setId(rs.getInt("id"));
                 livro.setDisponivel(rs.getBoolean("disponivel"));
                 return livro;
             }

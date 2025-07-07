@@ -3,9 +3,14 @@ import livro.Livro;
 import livro.LivroDAO;
 import usuario.Usuario;
 import usuario.UsuarioDao;
+
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
+
+import emprestimo.Emprestimo;
+import emprestimo.EmprestimoDAO;
 
 
 public class SistemaDeGerenciamentoDeBiblioteca {                                        
@@ -137,6 +142,16 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                     if (livro != null && livro.getDisponivel()) {
                         livro.setDisponivel(false); 
                         livroDAO.atualizarLivro(livro);
+
+                        Emprestimo emprestimo = new Emprestimo();
+                        emprestimo.setUsuarioId(usuarioId);
+                        emprestimo.setLivroId(livro.getId());
+                        emprestimo.setDataAluguel(LocalDateTime.now());
+
+                        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+                        emprestimoDAO.salvarEmprestimo(emprestimo);
+
+                        
                         System.out.println("Livro " + livro.getTitulo() + " alugado com sucesso!");
                         separador();
                     } else {
@@ -146,15 +161,22 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                 }
 
                 case 4 -> {
-
+                    EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
                     System.out.print("Digite o título do livro para devolver: ");
                     String titulo = scanner.nextLine();
 
                     Livro livro = livroDAO.buscarLivroPorTitulo(titulo);
 
                     if (livro != null && !livro.getDisponivel()) {
-                        livro.setDisponivel(true);
-                        livroDAO.atualizarLivro(livro);
+
+                        Emprestimo emprestimo = emprestimoDAO.buscarEmprestimoAtivoPorLivroId(livro.getId());
+                        if (emprestimo != null) {
+                            emprestimoDAO.devolverLivro(emprestimo.getId());
+                            livro.setDisponivel(true);
+                            livroDAO.atualizarLivro(livro);
+                        }else {
+                            System.out.println("Nenhum empréstimo ativo encontrado para este livro.");
+                        }
                         System.out.println("Livro " + livro.getTitulo() + " devolvido com sucesso!");
                         separador();
                     } else {

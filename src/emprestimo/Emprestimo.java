@@ -19,6 +19,10 @@ public class Emprestimo {
     
     }
 
+    public Emprestimo(){
+        
+    }
+
     public int getId() {
         return id;
     }

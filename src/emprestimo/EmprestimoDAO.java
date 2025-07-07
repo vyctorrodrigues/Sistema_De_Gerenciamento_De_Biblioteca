@@ -67,6 +67,30 @@ public class EmprestimoDAO {
         }
     }
 
+    public Emprestimo buscarEmprestimoAtivoPorLivroId(int livroId) {
+        String sql = "SELECT * FROM emprestimos WHERE livro_id = ? AND data_devolucao IS NULL";
+
+        try (Connection conn = Conexao.conectar();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, livroId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Emprestimo(
+                rs.getInt("id"),
+                (UUID) rs.getObject("usuario_id"),
+                rs.getInt("livro_id"),
+                rs.getTimestamp("data_aluguel").toLocalDateTime(),
+                null
+            );
+            }
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar empréstimo ativo: " + e.getMessage());
+        }
+        return null;
+    }
+
     //Buscando empréstimos por usuário
     public List<Emprestimo> buscarEmprestimoPorUsuario(UUID usuarioId){
         List<Emprestimo> lista = new ArrayList<>();
