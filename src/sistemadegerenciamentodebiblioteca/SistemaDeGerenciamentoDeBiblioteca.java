@@ -50,6 +50,7 @@ public class SistemaDeGerenciamentoDeBiblioteca {
         Scanner scanner = new Scanner(System.in);
         UsuarioDao usuarioDao = new UsuarioDao();
         LivroDAO livroDAO = new LivroDAO();
+        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
         
        
         
@@ -67,7 +68,8 @@ public class SistemaDeGerenciamentoDeBiblioteca {
             System.out.println("8 - Remover livro por ID");
             System.out.println("9 - Remover livro por titulo");
             System.out.println("10 - Remover usuário por ID");
-            System.out.println("11 - Sair");
+            System.out.println("11 - Listar Emprestimos");
+            System.out.println("12 - Sair");
             System.out.print(">> Escolha uma opção: ");
             if (!scanner.hasNextInt()) {
                 System.out.println("Digite apenas números!");
@@ -148,7 +150,7 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                         emprestimo.setLivroId(livro.getId());
                         emprestimo.setDataAluguel(LocalDateTime.now());
 
-                        EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+                        
                         emprestimoDAO.salvarEmprestimo(emprestimo);
 
                         
@@ -161,7 +163,7 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                 }
 
                 case 4 -> {
-                    EmprestimoDAO emprestimoDAO = new EmprestimoDAO();
+                    
                     System.out.print("Digite o título do livro para devolver: ");
                     String titulo = scanner.nextLine();
 
@@ -336,8 +338,25 @@ public class SistemaDeGerenciamentoDeBiblioteca {
                     }
                     separador();
                 }
-                
+
                 case 11 -> {
+                    List<Emprestimo> emprestimos = emprestimoDAO.listarEmprestimos();
+                    if (emprestimos.isEmpty()) {
+                        System.out.println("Nenhum empréstimo encontrado.");
+                    } else {
+                        System.out.println("Lista de empréstimos:");
+                        for (Emprestimo e : emprestimos) {
+                            System.out.println("ID: " + e.getId() +
+                            " | Usuário ID: " + e.getUsuarioId() +
+                            " | Livro ID: " + e.getLivroId() +
+                            " | Alugado em: " + e.getDataAluguel() +
+                            " | Devolvido em: " + (e.getDataDevolucao() != null ? e.getDataDevolucao() : "Não devolvido"));
+                        }
+                    }
+                    separador();
+                }
+                
+                case 12 -> {
                     System.out.println("\nObrigado por usar o sistema. Até a próxima!");
                     break OUTER;
                 }
