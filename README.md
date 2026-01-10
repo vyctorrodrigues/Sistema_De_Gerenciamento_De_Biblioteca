@@ -48,53 +48,6 @@ Vamos construir juntos um sistema cada vez melhor
 
 ## 📘 Diagrama UML (Mermaid)
 
-```mermaid
-classDiagram
+## Diagrama de Classes (UML)
 
-class Usuario {
-  UUID id
-  String nome
-  String email
-}
-
-class Livro {
-  int id
-  String titulo
-  String autor
-  String genero
-  boolean disponivel
-}
-
-class Emprestimo {
-  int id
-  UUID usuarioId
-  int livroId
-  LocalDateTime dataAluguel
-  LocalDateTime dataDevolucao
-}
-
-class UsuarioDAO {
-  +cadastrarUsuario(Usuario)
-  +listarUsuarios(): List<Usuario>
-  +buscarPorId(UUID): Usuario
-}
-
-class LivroDAO {
-  +cadastrarLivro(Livro)
-  +atualizarLivro(Livro)
-  +buscarLivroPorTitulo(String): Livro
-}
-
-class EmprestimoDAO {
-  +salvarEmprestimo(Emprestimo)
-  +devolverLivro(int)
-  +listarEmprestimos(): List<Emprestimo>
-  +buscarEmprestimoAtivoPorLivroId(int): Emprestimo
-}
-
-Usuario "1" --> "0..*" Emprestimo : realiza
-Livro "1" --> "0..*" Emprestimo : é emprestado em
-
-UsuarioDAO --> Usuario
-LivroDAO --> Livro
-EmprestimoDAO --> Emprestimo
+![Diagrama UML](docs/uml/diagrama-classes.png)
