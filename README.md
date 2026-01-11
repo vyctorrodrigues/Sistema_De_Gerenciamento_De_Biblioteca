@@ -50,4 +50,4 @@ Vamos construir juntos um sistema cada vez melhor
 
 ![Diagrama UML](docs/uml/diagrama-classes/diagrama-classes.png)
 
-> O código-fonte do diagrama está em `docs/uml/diagrama-classes/diagrama-classes.puml`
+[Ver código do diagrama UML (PlantUML)](docs/uml/diagrama-classes/diagrama-classes.puml)
