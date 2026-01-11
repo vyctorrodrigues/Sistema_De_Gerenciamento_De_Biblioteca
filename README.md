@@ -49,5 +49,3 @@ Vamos construir juntos um sistema cada vez melhor
 ## Diagrama de Classes (UML)
 
 ![Diagrama UML](docs/uml/diagrama-classes/diagrama-classes.png)
-
-[Ver código do diagrama UML (PlantUML)](docs/uml/diagrama-classes/diagrama-classes.puml)
